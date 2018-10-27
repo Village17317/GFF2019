@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e19956d9b5d27418c4599a6fc638ce, type: 3}
   m_Name: PlayerState
   m_EditorClassIdentifier: 
-  hp: 1
-  speed: 1.87
-  power: 1
-  defense: 0
+  _hp: 0
+  _speed: 0.1
+  _power: 1
+  _defense: 0

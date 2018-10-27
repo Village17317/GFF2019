@@ -1,5 +1,5 @@
 ﻿/*作成者     ：村上 和樹
- *機能説明   ：
+ *機能説明   ： 各Actorのステータス
  *初回作成日 ： 2018/10/26
  *更新日     ： 2018/10/26
 */
@@ -10,17 +10,22 @@ namespace Village
 {
     public class ActorState : ScriptableObject
     {
-        [SerializeField] private float hp      = 1.0f;
-        [SerializeField] private float speed   = 1.0f;
-        [SerializeField] private float power   = 1.0f;
-        [SerializeField] private float defense = 0.0f;
+        [SerializeField] private float _hp      = 1.0f;
+        [SerializeField] private float _speed   = 1.0f;
+        [SerializeField] private float _power   = 1.0f;
+        [SerializeField] private float _defense = 0.0f;
 
         /// <summary>
         /// 体力
         /// </summary>
         public float Hp
         {
-            get { return hp; }
+            get { return _hp; }
+            set
+            {
+                _hp = value;
+                _hp = Mathf.Max(_hp, 0f);
+            }
         }
 
         /// <summary>
@@ -28,7 +33,8 @@ namespace Village
         /// </summary>
         public float Speed
         {
-            get { return speed; }
+            get { return _speed; }
+            set { _speed = value; }
         }
 
         /// <summary>
@@ -36,7 +42,8 @@ namespace Village
         /// </summary>
         public float Power
         {
-            get { return power; }
+            get { return _power; }
+            set { _power = value; }
         }
 
         /// <summary>
@@ -44,7 +51,8 @@ namespace Village
         /// </summary>
         public float Defense
         {
-            get { return defense; }
+            get { return _defense; }
+            set { _defense = value; }
         }
     }
 }
