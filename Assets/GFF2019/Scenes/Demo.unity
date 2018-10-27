@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 39361284}
   - component: {fileID: 39361286}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85615004916a32649bce7d0f0cf5f76a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 233a5957c69cbf842917e51731af1c54, type: 2}
+  _myState: {fileID: 0}
 --- !u!1 &490573044
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4295380294245764caae9361bb500401, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
