@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
@@ -17,16 +18,31 @@ namespace Village
     public class UpdateManager : MonoBehaviour
     {
         [Header("Inheritorクラスを継承したクラスを格納する"),SerializeField]
-        private List<Inheritor> updateList = new List<Inheritor>();
+        private List<Inheritor> _updateList = new List<Inheritor>();
+
+        private static UpdateManager _instance;
+
+        public static UpdateManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<UpdateManager>();
+                }
+
+                return _instance;
+            }
+        }
 
         ///<summary>
         /// 初期生成時
         ///</summary>
 		private void Start ()
         {
-            for(int i = 0;i < updateList.Count;i++)
+            for(int i = 0;i < _updateList.Count;i++)
             {
-                if (updateList[i] == null)
+                if (_updateList[i] == null)
                 {
                     DeleteAt(i);
                 }
@@ -38,15 +54,15 @@ namespace Village
         ///</summary>
         private void Update ()
         {
-            for(int i = 0;i < updateList.Count;i++)
+            for(int i = 0;i < _updateList.Count;i++)
             {
-                if (updateList[i] == null)
+                if (_updateList[i] == null)
                 {
                     DeleteAt(i);
                 }
-                else if (updateList[i].gameObject.activeInHierarchy)
+                else if (_updateList[i].gameObject.activeInHierarchy)
                 {
-                    updateList[i].Run();
+                    _updateList[i].Run();
                 }
             }
         }
@@ -56,15 +72,15 @@ namespace Village
         ///</summary>
         private void FixedUpdate ()
         {
-            for(int i = 0;i < updateList.Count;i++)
+            for(int i = 0;i < _updateList.Count;i++)
             {
-                if (updateList[i] == null)
+                if (_updateList[i] == null)
                 {
                     DeleteAt(i);
                 }
-                else if (updateList[i].gameObject.activeInHierarchy)
+                else if (_updateList[i].gameObject.activeInHierarchy)
                 {
-                    updateList[i].FixedRun();
+                    _updateList[i].FixedRun();
                 }
             }
         }
@@ -74,7 +90,7 @@ namespace Village
         /// </summary>
         public void Add(Inheritor inheritorObj) 
         {
-            updateList.Add(inheritorObj);
+            _updateList.Add(inheritorObj);
         }
 
         /// <summary>
@@ -82,7 +98,7 @@ namespace Village
         /// </summary>
         public void DeleteAt(int deleteNumber) 
         {
-            updateList.RemoveAt(deleteNumber);
+            _updateList.RemoveAt(deleteNumber);
         }
 
         /// <summary>
@@ -90,7 +106,7 @@ namespace Village
         /// </summary>
         public void DeleteAll() 
         {
-            updateList.Clear();
+            _updateList.Clear();
         }
 
         /// <summary>
@@ -98,12 +114,13 @@ namespace Village
         /// </summary>
         public void SetObject() 
         {
-            updateList.Clear();
-            foreach(Inheritor obj in FindObjectsOfType(typeof(Inheritor)))
+            _updateList.Clear();
+            foreach(var obj in FindObjectsOfType(typeof(Inheritor)))
             {
-                Add(obj);
+                var addObj = obj as Inheritor;
+                Add(addObj);
             }
-            updateList.Sort((a,b) => b.GetInstanceID() - a.GetInstanceID());
+            _updateList.Sort((a,b) => b.GetInstanceID() - a.GetInstanceID());
         }
     }
 }

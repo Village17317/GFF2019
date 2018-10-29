@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace Village
 {
-    public class Actor<T> : Inheritor where T : Actor<T>
+    public abstract class Actor<T> : Inheritor where T : Actor<T>
     {
-        [SerializeField] protected ActorParams MyState;
-        public                     ActorParams State { get { return MyState; } }
+        [SerializeField] protected ActorParams myState;
+        public                     ActorParams State { get { return myState; } }
         
-        protected                  IActorState<T> NowAction;
+        protected                  IActorState<T> nowAction;
 
         /// <summary>
         /// アクションの切替
@@ -20,7 +20,7 @@ namespace Village
         /// <param name="newAction"></param>
         public void ChengeState(IActorState<T> newAction)
         {
-            NowAction = newAction;
+            nowAction = newAction;
         }
         
         

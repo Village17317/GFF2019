@@ -15,7 +15,7 @@ namespace Village
     {
         private const float  ElementHeight = 25f;
         private const string LabelName     = "一覧";
-        private const string ListName      = "updateList";
+        private const string ListName      = "_updateList";
         
         private       ReorderableList _mList;
 

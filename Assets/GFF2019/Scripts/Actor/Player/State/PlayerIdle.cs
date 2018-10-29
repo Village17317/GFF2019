@@ -26,6 +26,7 @@ namespace Village
         {
             ObserveWalk();
             ObserveJump();
+            ObserveShot();
         }
 
         /// <summary>
@@ -46,6 +47,17 @@ namespace Village
             if (Owner.IsGround && Input.GetKeyDown(KeyCode.Space))
             {
                 Owner.ChengeState(new PlayerJump(Owner));
+            }
+        }
+
+        /// <summary>
+        /// Idle -> Shot
+        /// </summary>
+        private void ObserveShot()
+        {
+            if (!Owner.IsAttack && Input.GetKeyDown(KeyCode.Z))
+            {
+                Owner.ChengeState(new PlayerShot(Owner));
             }
         }
         

@@ -11,6 +11,11 @@ namespace Village
 {
     public class Player : Actor<Player>
     {
+        [SerializeField] private BulletParams _bulletParams;
+        
+        
+        public BulletParams BulletData{ get {return _bulletParams; } }
+        
         /// <summary>
         /// 移動中か
         /// </summary>
@@ -39,6 +44,16 @@ namespace Village
                 return Physics.Raycast(ray, out hit, length);
             }
         }
+
+        /// <summary>
+        /// 攻撃中か
+        /// </summary>
+        public bool IsAttack
+        {
+            get { return false; }
+        }
+        
+        
         
         ///<summary>
         /// 初期起動時
@@ -53,9 +68,9 @@ namespace Village
         /// </summary>
         public override void Run ()
         {
-            NowAction.Run();
+            nowAction.Run();
             
-            Debug.Log(NowAction.StateName);
+            Debug.Log(nowAction.StateName);
         }
 
 
