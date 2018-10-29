@@ -1,7 +1,7 @@
 ﻿/*作成者     ：村上 和樹
  *機能説明   ：Playerの待機状態
  *初回作成日 ：2018/10/27
- *更新日     ：2018/10/27
+ *更新日     ：2018/10/29
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Village
 {
-    public class PlayerIdle : IActorAction<Player>
+    public class PlayerIdle : IActorState<Player>
     {
         public Player Owner { get; set; }
         public string StateName { get { return "Idle"; } }

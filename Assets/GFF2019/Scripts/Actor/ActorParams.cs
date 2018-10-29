@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Village
 {
-    public class ActorState : ScriptableObject
+    public class ActorParams : ScriptableObject
     {
         [SerializeField] private float _hp      = 1.0f;
         [SerializeField] private float _speed   = 1.0f;

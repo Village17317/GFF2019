@@ -6,7 +6,7 @@
 
 namespace Village
 {
-    public interface IActorAction<T> where T : Actor<T>
+    public interface IActorState<T> where T : Actor<T>
     {
         /// <summary>
         /// 利用者

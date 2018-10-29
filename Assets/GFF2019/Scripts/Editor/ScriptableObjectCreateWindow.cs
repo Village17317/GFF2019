@@ -1,7 +1,7 @@
 ﻿/*作成者     ：村上 和樹
  *機能説明   ：
- *初回作成日 ：
- *更新日     ：
+ *初回作成日 ：2018/10/26
+ *更新日     ：2018/10/29
 */
 using System;
 using System.Collections;
@@ -15,15 +15,18 @@ namespace Village
     {
         private enum ClassTab
         {
-            ActorState,
+            ActorParams,
         }
         
         private const string TabName = "ScriptableObjectCreateWindow";
 
-        private ClassTab _tab      = ClassTab.ActorState;
+        private ClassTab _tab      = ClassTab.ActorParams;
         private string   _path     = "";
         private string   _fileName = "";
         
+        /// <summary>
+        /// Windowを作成
+        /// </summary>
         [MenuItem("Village/" + TabName)]
         public static void ShowWindow()
         {
@@ -46,7 +49,7 @@ namespace Village
             {
                 switch (_tab)
                 {
-                case ClassTab.ActorState: CreateAsset<ActorState>(); break;
+                case ClassTab.ActorParams: CreateAsset<ActorParams>(); break;
                 default: break;
                 }
             }
