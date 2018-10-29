@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Village
 {
-    public class PlayerIdle : IActorState<Player>
+    public class PlayerLowerIdle : IActorLowerState<Player>
     {
         public Player Owner { get; set; }
         public string StateName { get { return "Idle"; } }
@@ -17,16 +17,15 @@ namespace Village
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public PlayerIdle(Player owner)
+        public PlayerLowerIdle(Player owner)
         {
             Owner = owner;
         }
     
-        public void Run()
+        public void Execute()
         {
             ObserveWalk();
             ObserveJump();
-            ObserveShot();
         }
 
         /// <summary>
@@ -48,18 +47,6 @@ namespace Village
             {
                 Owner.ChengeState(new PlayerJump(Owner));
             }
-        }
-
-        /// <summary>
-        /// Idle -> Shot
-        /// </summary>
-        private void ObserveShot()
-        {
-            if (!Owner.IsAttack && Input.GetKeyDown(KeyCode.Z))
-            {
-                Owner.ChengeState(new PlayerShot(Owner));
-            }
-        }
-        
+        }        
     }
 }

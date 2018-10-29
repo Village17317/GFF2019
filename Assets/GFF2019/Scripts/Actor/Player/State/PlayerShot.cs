@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Village
 {
-    public class PlayerShot : IActorState<Player>
+    public class PlayerShot : IActorUpperState<Player>
     {
         public Player Owner     { get; set; }
         public string StateName { get { return "Shot";} }
@@ -23,7 +23,7 @@ namespace Village
             Owner = owner;
         }
 
-        public void Run()
+        public void Execute()
         {
             var bullet = CreateBullet(Owner.BulletData.FirePos);
             Fire(bullet);
@@ -31,12 +31,14 @@ namespace Village
             ObserveIdle();
         }
 
+        /// <summary>
+        /// Shot -> Idle
+        /// </summary>
         private void ObserveIdle()
         {
             if(Owner.IsAttack) { return; }
-            
-            
-            Owner.ChengeState(new PlayerIdle(Owner));
+                     
+            Owner.ChengeState(new PlayerUpperIdle(Owner));
         }
 
         private GameObject CreateBullet(Vector3 pos)

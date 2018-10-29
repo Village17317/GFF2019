@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Village
 {
-    public class PlayerWalk : IActorState<Player>
+    public class PlayerWalk : IActorLowerState<Player>
     {
         private float     _speed = 0f;
         private Transform _tf;
@@ -27,11 +27,10 @@ namespace Village
             _speed = owner.State.Speed;
         }
         
-        public void Run()
+        public void Execute()
         {
             ObserveIdle();
             ObserveJump();
-            ObserveShot();
             
             Move();
         }
@@ -43,7 +42,7 @@ namespace Village
         {
             if(Owner.IsMove) { return; }
 
-            Owner.ChengeState(new PlayerIdle(Owner));
+            Owner.ChengeState(new PlayerLowerIdle(Owner));
         }
         
         /// <summary>
@@ -54,17 +53,6 @@ namespace Village
             if (Owner.IsGround && Input.GetKeyDown(KeyCode.Space))
             {
                 Owner.ChengeState(new PlayerJump(Owner));
-            }
-        }
-
-        /// <summary>
-        /// Idle -> Shot
-        /// </summary>
-        private void ObserveShot()
-        {
-            if (!Owner.IsAttack && Input.GetKeyDown(KeyCode.Z))
-            {
-                Owner.ChengeState(new PlayerShot(Owner));
             }
         }
         

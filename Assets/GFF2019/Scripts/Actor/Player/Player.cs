@@ -60,7 +60,8 @@ namespace Village
         ///</summary>
         private void Awake ()
         {
-            ChengeState(new PlayerIdle(this));
+            ChengeState(new PlayerUpperIdle(this));
+            ChengeState(new PlayerLowerIdle(this));
         }
 
         /// <summary>
@@ -68,9 +69,11 @@ namespace Village
         /// </summary>
         public override void Run ()
         {
-            nowAction.Run();
+            nowUpperAction.Execute();
+            nowLowerAction.Execute();
             
-            Debug.Log(nowAction.StateName);
+            Debug.Log("<color=orange>" + nowUpperAction.StateName + "</color>");
+            Debug.Log("<color=green>" + nowLowerAction.StateName + "</color>");
         }
 
 

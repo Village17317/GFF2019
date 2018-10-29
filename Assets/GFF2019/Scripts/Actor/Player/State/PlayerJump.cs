@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Village
 {
-    public class PlayerJump : IActorState<Player>
+    public class PlayerJump : IActorLowerState<Player>
     {
         private Transform _tf;
         private Rigidbody _rigid;
@@ -32,7 +32,7 @@ namespace Village
             _rigid.AddForce(Vector3.up * _jumpForce,ForceMode.Impulse);
         }
         
-        public void Run()
+        public void Execute()
         {
             ObserverIdle();
             Move();
@@ -45,7 +45,7 @@ namespace Village
         {
             if(!Owner.IsGround) { return; }
             
-            Owner.ChengeState(new PlayerIdle(Owner));
+            Owner.ChengeState(new PlayerLowerIdle(Owner));
         }
         
         /// <summary>

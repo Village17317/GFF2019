@@ -12,17 +12,22 @@ namespace Village
         [SerializeField] protected ActorParams myState;
         public                     ActorParams State { get { return myState; } }
         
-        protected                  IActorState<T> nowAction;
-
+        protected                  IActorUpperState<T> nowUpperAction;
+        protected                  IActorLowerState<T> nowLowerAction;
+        
         /// <summary>
         /// アクションの切替
         /// </summary>
         /// <param name="newAction"></param>
-        public void ChengeState(IActorState<T> newAction)
+        public void ChengeState(IActorUpperState<T> newAction)
         {
-            nowAction = newAction;
+            nowUpperAction = newAction;
         }
         
+        public void ChengeState(IActorLowerState<T> newAction)
+        {
+            nowLowerAction = newAction;
+        }
         
     }
 }
