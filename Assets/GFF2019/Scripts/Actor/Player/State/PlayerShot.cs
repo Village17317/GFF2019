@@ -3,8 +3,7 @@
  *初回作成日 ：
  *更新日     ：
 */
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace Village
@@ -41,6 +40,10 @@ namespace Village
             Owner.ChengeState(new PlayerUpperIdle(Owner));
         }
 
+        /// <summary>
+        /// 弾の生成
+        /// </summary>
+        /// <param name="pos">射出位置</param>
         private GameObject CreateBullet(Vector3 pos)
         {
             var bullet = Owner.BulletData.BulletInstance;
@@ -48,6 +51,10 @@ namespace Village
             return bullet;
         }
 
+        /// <summary>
+        /// 射出
+        /// </summary>
+        /// <param name="bullet">発射するもの</param>
         private void Fire(GameObject bullet)
         {
             bullet.GetComponent<Rigidbody>().AddForce(Owner.transform.forward * Owner.BulletData.Force);

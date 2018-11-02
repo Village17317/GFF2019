@@ -11,6 +11,8 @@ namespace Village
 {
     public class Bullet : OverReaction
     {
+        private Count _boundCounter;
+        
 
         ///<summary>
         /// 初期起動時
@@ -18,6 +20,7 @@ namespace Village
         protected override void Awake ()
         {
             base.Awake();
+            _boundCounter = new Count();
             UpdateManager.Instance.Add(this);
         }
 
@@ -26,9 +29,23 @@ namespace Village
         ///</summary>
         public override void Run ()
         {
-            
+            if (IsDeath) { Destroy(gameObject); }
         }
 
-
+        private bool IsDeath
+        {
+            get { return _boundCounter.Data >= 1000; }
+        } 
+        
+        
+        /// <summary>
+        /// 衝突時の当たり判定
+        /// </summary>
+        /// <param name="other"></param>
+        private void OnCollisionEnter(Collision other)
+        {
+            _boundCounter.CountUp(1);
+            Debug.Log("name :" + other.gameObject.name + " isHit! ");
+        }
     }
 }

@@ -6,6 +6,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Compatibility;
 using UnityEditor;
 using UnityEngine;
 

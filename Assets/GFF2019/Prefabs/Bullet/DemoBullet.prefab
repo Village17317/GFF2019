@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4683787467187582}
   - component: {fileID: 33873521798910400}
   - component: {fileID: 23433140444750542}
-  - component: {fileID: 135099946230125904}
   - component: {fileID: 54217163143555838}
   - component: {fileID: 114068077153439646}
+  - component: {fileID: 135044811059042378}
   m_Layer: 0
   m_Name: DemoBullet
   m_TagString: Untagged
@@ -111,11 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44b9ee2cfc358a4da48f3af4e990981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDeformScale: 3
+  maxDeformScale: 10
   minDeformScale: 0.2
   deformPower: 5
   undeformPower: 0.5
---- !u!135 &135099946230125904
+--- !u!135 &135044811059042378
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

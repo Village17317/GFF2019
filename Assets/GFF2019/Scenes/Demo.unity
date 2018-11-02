@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 39361286}
   - component: {fileID: 39361288}
   m_Layer: 0
-  m_Name: Kyogif
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 39361283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1567080760}
@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 490573047}
   - component: {fileID: 490573046}
   - component: {fileID: 490573045}
+  - component: {fileID: 490573049}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -285,6 +286,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &490573049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 490573044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcef0b7c723ccf4aa3514414dddb0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 39361285}
+  _correction: {x: 0, y: 0, z: 0}
 --- !u!1 &537038306
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,13 +376,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 537038306}
-  m_LocalRotation: {x: 0, y: -0.23938091, z: 0, w: 0.97092575}
+  m_LocalRotation: {x: 0, y: 0.3512698, z: 0, w: 0.9362743}
   m_LocalPosition: {x: -0.89, y: 1.06, z: 8.95}
   m_LocalScale: {x: 7.113663, y: 6.0269694, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: -27.7, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 41.13, z: 0}
 --- !u!1 &555843028
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _updateList:
   - {fileID: 39361286}
+  - {fileID: 490573049}
 --- !u!4 &1444929575
 Transform:
   m_ObjectHideFlags: 0

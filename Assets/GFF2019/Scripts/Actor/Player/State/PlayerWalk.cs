@@ -13,8 +13,8 @@ namespace Village
     {
         private float     _speed = 0f;
         private Transform _tf;
-        
-        public Player Owner { get; set; }
+
+        public Player Owner     { get; set; }
         public string StateName { get { return "Walk"; } }
         
         /// <summary>
@@ -61,10 +61,32 @@ namespace Village
         /// </summary>
         private void Move()
         {           
-            float addX = Input.GetAxis("Horizontal") * _speed;
-            float addZ = Input.GetAxis("Vertical")   * _speed;
+            ForwardAim();
             
-            _tf.position += new Vector3(addX,0f,addZ);   
+            float addX = Controller.Instance.LeftGetAxis().x * _speed;
+            float addZ = Controller.Instance.LeftGetAxis().y * _speed;
+            
+            _tf.position += new Vector3(addX,0,addZ); 
+            
+            
+            
+            
+        }
+
+        /// <summary>
+        /// 進行方向を向く
+        /// </summary>
+        private void ForwardAim()
+        {
+            if(Input.GetAxis("Horizontal").Equals(0f)) { return; }
+            if(Input.GetAxis("Vertical").Equals(0f))   { return; }
+
+            float x = Input.GetAxis("Horizontal") * 10;
+            float z = Input.GetAxis("Vertical")   * 10;
+
+            Vector3 dir    = _tf.position + new Vector3(x,0,z);
+
+            _tf.LookAt(dir);
         }
     }
 }
