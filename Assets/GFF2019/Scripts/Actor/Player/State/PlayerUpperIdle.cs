@@ -3,16 +3,10 @@
  *初回作成日 ：2018/10/29
  *更新日     ：2018/10/29
 */
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Village
 {
     public class PlayerUpperIdle : IActorUpperState<Player>
     {
-
-
         public Player Owner { get; set; }
         public string StateName { get{return "Idle"; } }
         
@@ -34,9 +28,9 @@ namespace Village
         /// </summary>
         private void ObserveShot()
         {
-            if (!Owner.IsAttack && Input.GetKeyDown(KeyCode.Z))
+            if (Owner.IsAttack)
             {
-                Owner.ChengeState(new PlayerShot(Owner));
+                Owner.ChangeUpperState(new PlayerShot(Owner));
             }       
         }
         

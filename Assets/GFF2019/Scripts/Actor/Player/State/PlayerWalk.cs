@@ -11,11 +11,11 @@ namespace Village
 {
     public class PlayerWalk : IActorLowerState<Player>
     {
-        private float     _speed = 0f;
         private Transform _tf;
+        private float     _speed = 0f;
 
         public Player Owner     { get; set; }
-        public string StateName { get { return "Walk"; } }
+        public virtual string StateName { get { return "Walk"; } }
         
         /// <summary>
         /// コンストラクタ
@@ -27,7 +27,7 @@ namespace Village
             _speed = owner.State.Speed;
         }
         
-        public void Execute()
+        public virtual void Execute()
         {
             ObserveIdle();
             ObserveJump();
@@ -42,7 +42,7 @@ namespace Village
         {
             if(Owner.IsMove) { return; }
 
-            Owner.ChengeState(new PlayerLowerIdle(Owner));
+            Owner.ChangeLowerState(new PlayerLowerIdle(Owner));
         }
         
         /// <summary>
@@ -50,27 +50,20 @@ namespace Village
         /// </summary>
         private void ObserveJump()
         {
-            if (Owner.IsGround && Input.GetKeyDown(KeyCode.Space))
+            if (Owner.IsJump)
             {
-                Owner.ChengeState(new PlayerJump(Owner));
+                Owner.ChangeLowerState(new PlayerJump(Owner));
             }
         }
         
         /// <summary>
         /// 移動
         /// </summary>
-        private void Move()
+        protected void Move()
         {           
             ForwardAim();
-            
-            float addX = Controller.Instance.LeftGetAxis().x * _speed;
-            float addZ = Controller.Instance.LeftGetAxis().y * _speed;
-            
-            _tf.position += new Vector3(addX,0,addZ); 
-            
-            
-            
-            
+                        
+            _tf.position += MoveDirection() * _speed;            
         }
 
         /// <summary>
@@ -78,15 +71,29 @@ namespace Village
         /// </summary>
         private void ForwardAim()
         {
-            if(Input.GetAxis("Horizontal").Equals(0f)) { return; }
-            if(Input.GetAxis("Vertical").Equals(0f))   { return; }
+            if(Controller.Instance.LeftAxis().Equals(Vector2.zero)) { return; }
+            
+            _tf.LookAt(_tf.position + MoveDirection());
+        }
 
-            float x = Input.GetAxis("Horizontal") * 10;
-            float z = Input.GetAxis("Vertical")   * 10;
+        /// <summary>
+        /// 移動方向を決める
+        /// </summary>
+        /// <returns></returns>
+        private Vector3 MoveDirection()
+        {
+            //想定した横方向
+            float x = Controller.Instance.LeftAxis().x;
+            //想定した前方向
+            float z = Controller.Instance.LeftAxis().y;
+            
+            //カメラから見た方向に直す
+            Vector3 dir = (Owner.CameraRight * x + Owner.CameraForwerd * z);
 
-            Vector3 dir    = _tf.position + new Vector3(x,0,z);
+            //Y軸方向にも移動してしまうので0で補正
+            dir.y = 0f;
 
-            _tf.LookAt(dir);
+            return dir;
         }
     }
 }

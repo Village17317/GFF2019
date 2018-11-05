@@ -19,16 +19,16 @@ namespace Village
 
         private Mesh      _baseMesh;
         private Vector3[] _baseVertices;
-        private Bounds    _baseBounds;
-
-        private Vector3 _prevPosition;
+        private Vector3   _prevPosition;
+        private Vector3   _prevMove;
         
-        private Vector3 _prevMove;
+        protected bool isMeshDeformed = false;
         
         public Vector3 NowMove      { get; private set; }
         public Vector3 MoveEnergy   { get; private set; }
         public Vector3 DeformEnergy { get; private set; }
 
+        
         ///<summary>
         /// 初期起動時
         ///</summary>
@@ -36,7 +36,6 @@ namespace Village
         {
             _baseMesh     = GetComponent<MeshFilter>().mesh;
             _baseVertices = _baseMesh.vertices;
-            _baseBounds   = _baseMesh.bounds;
 
             _prevPosition = transform.position;
             _prevMove     = Vector3.zero;
@@ -44,13 +43,14 @@ namespace Village
             NowMove       = Vector3.zero;
             MoveEnergy    = Vector3.zero;
             DeformEnergy  = Vector3.zero;
-            
         }
 
         public override void FixedRun()
         {
+            if(!isMeshDeformed) { return; }
+            
             NowMove = transform.position - _prevPosition;
-
+            
             UpdateMoveEnergy();
             UpdateDeformEnergy();
             DeformMesh();
@@ -61,6 +61,28 @@ namespace Village
             _prevMove     = NowMove;
         }
 
+        protected void OnDrawGizmos()
+        {
+            if (this.transform == null) 
+            {
+                return;
+            }
+
+            Color     prevColor  = Gizmos.color;
+            Matrix4x4 prevMatrix = Gizmos.matrix;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(this.transform.position,
+                            this.transform.position + (NowMove.normalized * 3));
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(this.transform.position,
+                            this.transform.position + (MoveEnergy.normalized * 3));
+
+            Gizmos.color  = prevColor;
+            Gizmos.matrix = prevMatrix;
+        }
+        
         /// <summary>
         /// 運動エネルギーの算出
         /// </summary>
@@ -72,6 +94,7 @@ namespace Village
                 y = UpdateMoveEnergy(NowMove.y, _prevMove.y, MoveEnergy.y),
                 z = UpdateMoveEnergy(NowMove.z, _prevMove.z, MoveEnergy.z),
             };
+            
         }
 
         /// <summary>
@@ -88,17 +111,26 @@ namespace Village
             int moveEnergySign = Sign(moveEnergy);
 
             // 動きがない時は現存する運動エネルギーを減衰させていく
-            if (nowMoveSign == 0) { return moveEnergy * undeformPower; }
+            if (nowMoveSign == 0)
+            {
+                return moveEnergy * undeformPower;
+            }
 
             // 現在の動きと直前の動きが反転しているときは、運動エネルギーを反転させる
-            if (nowMoveSign != prevMoveSign) { return moveEnergy - nowMove; }
+            if (nowMoveSign != prevMoveSign)
+            {
+                return moveEnergy - nowMove;
+            }
 
             // 現在の動きと運動エネルギーが運動エネルギーを小さくする
-            if (nowMoveSign != moveEnergySign) { return moveEnergy + nowMove; }
+            if (nowMoveSign != moveEnergySign)
+            {
+                return moveEnergy + nowMove;
+            }
 
             // 上記の条件以外の場合、現在の動きと運動エネルギーが同じ方向の場合は
             // 現在の動きと現存するエネルギーとを比較して、大きい方を採用する
-           
+
             // （nowMoveSignがマイナスの時）
             if (nowMoveSign < 0) { return Mathf.Min(nowMove * deformPower, moveEnergy * undeformPower); }
             // （nowMoveSignがプラスの時）
@@ -115,7 +147,10 @@ namespace Village
             float deformEnergyHorizontalRatio = deformEnergyVertical / maxDeformScale;
             float deformEnergyHorizontal = 1f - deformEnergyHorizontalRatio;
 
-            if (deformEnergyVertical < 0f) { deformEnergyVertical = deformEnergyHorizontalRatio; }
+            if (deformEnergyVertical < 0f)
+            {
+                deformEnergyVertical = deformEnergyHorizontalRatio;
+            }
 
             deformEnergyVertical   = Mathf.Clamp(1f + deformEnergyVertical, minDeformScale, maxDeformScale);
             deformEnergyHorizontal = Mathf.Clamp(deformEnergyHorizontal   , minDeformScale, maxDeformScale);
@@ -128,7 +163,7 @@ namespace Village
         /// メッシュの変形
         /// </summary>
         private void DeformMesh()
-        {
+        {                        
             Vector3[]  deformedVertices          = new Vector3[_baseVertices.Length];
             Quaternion nowRotation               = transform.localRotation;
             Quaternion nowRotationInverse        = Quaternion.Inverse(nowRotation);
@@ -167,7 +202,11 @@ namespace Village
             if (value.Equals(0f)) { return 0; }
 
             if (value > 0) { return 1; }
+
             return -1;
         }
+
+
+        
     }
 }

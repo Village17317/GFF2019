@@ -11,7 +11,8 @@ namespace Village
 {
     public class Player : Actor<Player>
     {
-        [SerializeField] private BulletParams _bulletParams;
+        [SerializeField] private BulletParams     _bulletParams;
+        [SerializeField] private CameraController _cameraController;        
         
         
         public BulletParams BulletData{ get {return _bulletParams; } }
@@ -23,7 +24,7 @@ namespace Village
         {
             get
             {
-                return !Input.GetAxis("Horizontal").Equals(0f) || !Input.GetAxis("Vertical").Equals(0f);
+                return !Controller.Instance.LeftAxis().Equals(Vector2.zero);
             }
         }
 
@@ -46,22 +47,44 @@ namespace Village
         }
 
         /// <summary>
-        /// 攻撃中か
+        /// 地面接触中にジャンプボタンが押されたとき
+        /// </summary>
+        public bool IsJump
+        {
+            get { return IsGround && Controller.Instance.IsJump(); }
+        }
+        
+        /// <summary>
+        /// ショットボタンが押されたとき
         /// </summary>
         public bool IsAttack
         {
-            get { return false; }
+            get { return Controller.Instance.IsShot(); }
         }
-        
-        
+
+        /// <summary>
+        /// カメラから見た正面
+        /// </summary>
+        public Vector3 CameraForwerd
+        {
+            get { return _cameraController.Forwerd; }
+        }
+
+        /// <summary>
+        /// カメラから見た右
+        /// </summary>
+        public Vector3 CameraRight
+        {
+            get { return _cameraController.Right; }
+        }
         
         ///<summary>
         /// 初期起動時
         ///</summary>
         private void Awake ()
         {
-            ChengeState(new PlayerUpperIdle(this));
-            ChengeState(new PlayerLowerIdle(this));
+            ChangeUpperState(new PlayerUpperIdle(this));
+            ChangeLowerState(new PlayerLowerIdle(this));
         }
 
         /// <summary>
@@ -72,8 +95,8 @@ namespace Village
             nowUpperAction.Execute();
             nowLowerAction.Execute();
             
-            Debug.Log("<color=orange>" + nowUpperAction.StateName + "</color>");
-            Debug.Log("<color=green>" + nowLowerAction.StateName + "</color>");
+            Debug.Log(StringBuildManager.Build("<color=orange>",nowUpperAction.StateName,"</color>"));
+            Debug.Log(StringBuildManager.Build("<color=green>" ,nowLowerAction.StateName,"</color>"));
         }
 
 

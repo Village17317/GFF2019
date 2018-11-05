@@ -3,6 +3,7 @@
  *初回作成日 ：2018/11/01
  *更新日     ：2018/11/01
 */
+
 using UnityEngine;
 
 namespace Village
@@ -11,20 +12,37 @@ namespace Village
     [RequireComponent(typeof(Camera))]
     [RequireComponent(typeof(FlareLayer))]
     public class CameraController : Inheritor
-    {
+    {  
+        [SerializeField] private Transform    _target;     //注視するターゲット
+        [SerializeField] private Vector3      _correction; //補正 
+        [SerializeField] private Range        _aimLimit;   //
         
-        [SerializeField] private Transform _target;     //注視するターゲット
-        [SerializeField] private Vector3   _correction; //補正 
+        private float _backLength = -10f;
+        
+        private int _rotateSignX = 1;
+        private int _rotateSignY = 1;
+        
         private ICameraMove _chaseMode;
-               
+              
         /// <summary>
         /// カメラから見た正面
         /// </summary>
         public Vector3 Forwerd
         {
-            get { return transform.forward; }
+            get
+            {
+                return transform.TransformDirection(Vector3.forward);             
+            }
         }
 
+        /// <summary>
+        /// カメラから見た正面
+        /// </summary>
+        public Vector3 Right
+        {
+            get { return transform.TransformDirection(Vector3.right); }   
+        }
+        
         /// <summary>
         /// 初期化処理
         /// </summary>
@@ -33,15 +51,15 @@ namespace Village
             ChaseModeChange(new CameraConstantMove(transform));
         }
 
-        ///<summary>
-        ///更新処理
-        ///</summary>
+        /// <summary>
+        /// 更新処理
+        /// </summary>
         public override void Run ()
         {
             if(_target == null) { return; }
             
             AimRotate();            
-            //ChaseMove();
+            ChaseMove();
         }
 
         /// <summary>
@@ -66,8 +84,8 @@ namespace Village
         /// ターゲットを追尾する
         /// </summary>
         private void ChaseMove()
-        {
-            _chaseMode.Move(_target.position,-1 * _target.forward * 10);
+        {            
+            _chaseMode.Move(_target.position + _correction, Forwerd * _backLength);
         }
  
         /// <summary>
@@ -75,12 +93,37 @@ namespace Village
         /// </summary>
         private void AimRotate()
         {
-            float x = _target.position.x;
-            float y = transform.position.y;
-            float z = _target.position.z;
+            float x = _rotateSignX * Controller.Instance.RightAxis().y;
+            float y = _rotateSignY * Controller.Instance.RightAxis().x;
             
-            transform.LookAt(new Vector3(x,y,z));
-            transform.RotateAround(_target.localPosition, Vector3.up,0);
+            transform.localEulerAngles += new Vector3(x, y);
+                                         
+            transform.localEulerAngles = RotationLimitX(transform.localEulerAngles,_aimLimit.Min,_aimLimit.Max);            
+        }
+
+        /// <summary>
+        /// X軸の補正
+        /// </summary>
+        /// <param name="rotation">回転情報</param>
+        /// <param name="min">最小値</param>
+        /// <param name="max">最大値</param>
+        private static Vector3 RotationLimitX(Vector3 rotation,float min,float max)
+        {
+            rotation.x = RotationValueLimit(rotation.x, min, max);
+            
+            return rotation;
+        }
+
+        /// <summary>
+        /// 回転座標の補正
+        /// </summary>
+        /// <param name="value">補正したい軸の値</param>
+        /// <param name="min">最小値</param>
+        /// <param name="max">最大値</param>
+        private static float RotationValueLimit(float value, float min, float max)
+        {
+            float angle = 180f <= value ? value - 360f : value;
+            return Mathf.Clamp(angle, min, max);
         }
         
         

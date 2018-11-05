@@ -1,7 +1,7 @@
 ﻿/*作成者     ：村上 和樹
- *機能説明   ：
- *初回作成日 ：
- *更新日     ：
+ *機能説明   ：入力
+ *初回作成日 ：2018/11/01
+ *更新日     ：2018/11/02
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -13,10 +13,10 @@ namespace Village
     {
         private const string LeftHorizontal  = "Horizontal";
         private const string LeftVertical    = "Vertical";
-        private const string RightHorizontal = "";
-        private const string RightVertical   = "";
-        private const string ShotKey         = "";
-        private const string JumpKey         = "";
+        private const string RightHorizontal = "Horizontal2";
+        private const string RightVertical   = "Vertical2";
+        private const string ShotKey         = "Shot";
+        private const string JumpKey         = "Jump";
         
         private bool _isShotDown = false;
 
@@ -31,12 +31,9 @@ namespace Village
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        Controller()
-        {
-            
-        }
+        Controller() { }
 
-        public Vector2 LeftGetAxis()
+        public Vector2 LeftAxis()
         {
             return Axis(LeftHorizontal, LeftVertical);
         }
@@ -57,12 +54,12 @@ namespace Village
 
         public bool IsShot()
         {
-            if (Input.GetAxis(ShotKey).Equals(1f) && !_isShotDown)
+            if (Input.GetAxis(ShotKey) >= 1f && !_isShotDown)
             {
                 _isShotDown = true;
                 return true;
             }
-            else if (Input.GetAxis(ShotKey).Equals(0f) && _isShotDown)
+            else if (Input.GetAxis(ShotKey) <= 0f && _isShotDown)
             {
                 _isShotDown = false;
                 return false;
@@ -75,8 +72,6 @@ namespace Village
         {
             return Input.GetButtonDown(JumpKey);
         }
-
-        
 
     }
 }

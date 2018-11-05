@@ -32,9 +32,12 @@ namespace Village
             if (IsDeath) { Destroy(gameObject); }
         }
 
+        /// <summary>
+        /// 死亡判定
+        /// </summary>
         private bool IsDeath
         {
-            get { return _boundCounter.Data >= 1000; }
+            get { return _boundCounter.Data >= 10; }
         } 
         
         
@@ -45,7 +48,7 @@ namespace Village
         private void OnCollisionEnter(Collision other)
         {
             _boundCounter.CountUp(1);
-            Debug.Log("name :" + other.gameObject.name + " isHit! ");
+            isMeshDeformed = true;
         }
     }
 }

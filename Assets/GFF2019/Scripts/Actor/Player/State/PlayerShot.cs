@@ -37,7 +37,7 @@ namespace Village
         {
             if(Owner.IsAttack) { return; }
                      
-            Owner.ChengeState(new PlayerUpperIdle(Owner));
+            Owner.ChangeUpperState(new PlayerUpperIdle(Owner));
         }
 
         /// <summary>

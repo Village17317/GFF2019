@@ -15,7 +15,7 @@ namespace Village
         /// <summary>
         /// 左のスティックのAxis
         /// </summary>
-        Vector2 LeftGetAxis();
+        Vector2 LeftAxis();
 
         /// <summary>
         /// 右のスティックのAxis

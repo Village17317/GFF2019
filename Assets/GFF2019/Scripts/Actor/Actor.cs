@@ -16,15 +16,19 @@ namespace Village
         protected                  IActorLowerState<T> nowLowerAction;
         
         /// <summary>
-        /// アクションの切替
+        /// 上半身のアクションの切替
         /// </summary>
         /// <param name="newAction"></param>
-        public void ChengeState(IActorUpperState<T> newAction)
+        public void ChangeUpperState(IActorUpperState<T> newAction)
         {
             nowUpperAction = newAction;
         }
         
-        public void ChengeState(IActorLowerState<T> newAction)
+        /// <summary>
+        /// 下半身のアクションの切替
+        /// </summary>
+        /// <param name="newAction"></param>
+        public void ChangeLowerState(IActorLowerState<T> newAction)
         {
             nowLowerAction = newAction;
         }

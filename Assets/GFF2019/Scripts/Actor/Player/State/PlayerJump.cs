@@ -9,30 +9,25 @@ using UnityEngine;
 
 namespace Village
 {
-    public class PlayerJump : IActorLowerState<Player>
+    public class PlayerJump : PlayerWalk
     {
-        private Transform _tf;
-        private Rigidbody _rigid;
-        private float     _speed = 0f; 
-        private float     _jumpForce = 10f;
-               
-        public Player Owner { get; set; }
-        public string StateName { get { return "Jump"; } }
-        
+        private const float JumpForce = 10f;
+
+        public override string StateName
+        {
+            get { return "Jump"; }
+        }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public PlayerJump(Player owner)
+        public PlayerJump(Player owner) : base(owner)
         {
-            Owner  = owner;
-            _tf    = owner.gameObject.transform;
-            _rigid = owner.GetComponent<Rigidbody>();
-            _speed = owner.State.Speed;
-            
-            _rigid.AddForce(Vector3.up * _jumpForce,ForceMode.Impulse);
+            var rigid = owner.GetComponent<Rigidbody>();
+            rigid.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
-        
-        public void Execute()
+
+        public override void Execute()
         {
             ObserverIdle();
             Move();
@@ -43,20 +38,12 @@ namespace Village
         /// </summary>
         private void ObserverIdle()
         {
-            if(!Owner.IsGround) { return; }
-            
-            Owner.ChengeState(new PlayerLowerIdle(Owner));
-        }
-        
-        /// <summary>
-        /// 移動
-        /// </summary>
-        private void Move()
-        {           
-            float addX = Input.GetAxis("Horizontal") * _speed;
-            float addZ = Input.GetAxis("Vertical")   * _speed;
-            
-            _tf.position += new Vector3(addX,0f,addZ);   
+            if (!Owner.IsGround)
+            {
+                return;
+            }
+
+            Owner.ChangeLowerState(new PlayerLowerIdle(Owner));
         }
     }
 }

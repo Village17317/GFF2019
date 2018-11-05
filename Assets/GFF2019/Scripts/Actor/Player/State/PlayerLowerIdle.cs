@@ -35,7 +35,7 @@ namespace Village
         {
             if(!Owner.IsMove) { return; }
             
-            Owner.ChengeState(new PlayerWalk(Owner));
+            Owner.ChangeLowerState(new PlayerWalk(Owner));
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Village
         {
             if (Owner.IsGround && Input.GetKeyDown(KeyCode.Space))
             {
-                Owner.ChengeState(new PlayerJump(Owner));
+                Owner.ChangeLowerState(new PlayerJump(Owner));
             }
         }        
     }

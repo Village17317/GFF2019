@@ -3,9 +3,11 @@
  *初回作成日 ：2018/10/25
  *更新日     ：2018/10/25
 */
+using UnityEngine;
+
 namespace Village
 {
-    public class NamedArrayAttribute : UnityEngine.PropertyAttribute
+    public class NamedArrayAttribute : PropertyAttribute
     {
         /// <summary>
         /// 各Indexの名前
