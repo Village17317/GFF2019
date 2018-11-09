@@ -13,19 +13,16 @@ namespace Village
     {
         [SerializeField] private BulletParams     _bulletParams;
         [SerializeField] private CameraController _cameraController;        
-        
-        
-        public BulletParams BulletData{ get {return _bulletParams; } }
+                
+        public BulletParams     BulletData { get { return _bulletParams;     } }
+        public CameraController MyCamera   { get { return _cameraController; } }
         
         /// <summary>
         /// 移動中か
         /// </summary>
         public bool IsMove
         {
-            get
-            {
-                return !Controller.Instance.LeftAxis().Equals(Vector2.zero);
-            }
+            get { return !Controller.Instance.LeftAxis().Equals(Vector2.zero); }
         }
 
         /// <summary>
@@ -53,29 +50,21 @@ namespace Village
         {
             get { return IsGround && Controller.Instance.IsJump(); }
         }
-        
+
+        /// <summary>
+        /// チャージ中かどうか
+        /// </summary>
+        public bool IsCharge
+        {
+            get { return Controller.Instance.IsCharge(); }
+        }
+           
         /// <summary>
         /// ショットボタンが押されたとき
         /// </summary>
         public bool IsAttack
         {
             get { return Controller.Instance.IsShot(); }
-        }
-
-        /// <summary>
-        /// カメラから見た正面
-        /// </summary>
-        public Vector3 CameraForwerd
-        {
-            get { return _cameraController.Forwerd; }
-        }
-
-        /// <summary>
-        /// カメラから見た右
-        /// </summary>
-        public Vector3 CameraRight
-        {
-            get { return _cameraController.Right; }
         }
         
         ///<summary>
@@ -92,13 +81,23 @@ namespace Village
         /// </summary>
         public override void Run ()
         {
+            //Aim時は右スティックの横軸でY軸回転
+            if (Controller.Instance.IsTargetAiming())
+            {
+                transform.Rotate(0,Controller.Instance.RightAxis().x,0);
+            }
+            
             nowUpperAction.Execute();
             nowLowerAction.Execute();
-            
-            Debug.Log(StringBuildManager.Build("<color=orange>",nowUpperAction.StateName,"</color>"));
-            Debug.Log(StringBuildManager.Build("<color=green>" ,nowLowerAction.StateName,"</color>"));
         }
 
-
+        /// <summary>
+        /// Debug用
+        /// </summary>
+        private void OnGUI()
+        {
+            GUILayout.Label(StringBuildManager.Build("Upper : ",nowUpperAction.StateName));
+            GUILayout.Label(StringBuildManager.Build("Lower : ",nowLowerAction.StateName));            
+        }
     }
 }

@@ -22,8 +22,6 @@ namespace Village
         private Vector3   _prevPosition;
         private Vector3   _prevMove;
         
-        protected bool isMeshDeformed = false;
-        
         public Vector3 NowMove      { get; private set; }
         public Vector3 MoveEnergy   { get; private set; }
         public Vector3 DeformEnergy { get; private set; }
@@ -47,7 +45,6 @@ namespace Village
 
         public override void FixedRun()
         {
-            if(!isMeshDeformed) { return; }
             
             NowMove = transform.position - _prevPosition;
             
@@ -59,28 +56,6 @@ namespace Village
             _prevPosition = transform.position;
             // 前フレームの動きとして格納
             _prevMove     = NowMove;
-        }
-
-        protected void OnDrawGizmos()
-        {
-            if (this.transform == null) 
-            {
-                return;
-            }
-
-            Color     prevColor  = Gizmos.color;
-            Matrix4x4 prevMatrix = Gizmos.matrix;
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(this.transform.position,
-                            this.transform.position + (NowMove.normalized * 3));
-
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(this.transform.position,
-                            this.transform.position + (MoveEnergy.normalized * 3));
-
-            Gizmos.color  = prevColor;
-            Gizmos.matrix = prevMatrix;
         }
         
         /// <summary>
@@ -205,8 +180,5 @@ namespace Village
 
             return -1;
         }
-
-
-        
     }
 }

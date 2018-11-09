@@ -11,7 +11,7 @@ namespace Village
 {
     public class PlayerJump : PlayerWalk
     {
-        private const float JumpForce = 10f;
+        private const float JumpForce = 10f; // ジャンプ
 
         public override string StateName
         {
@@ -29,19 +29,18 @@ namespace Village
 
         public override void Execute()
         {
-            ObserverIdle();
+            ObserveIdle();
+            
+            ForwardAim();
             Move();
         }
 
         /// <summary>
         /// Jump -> Idle
         /// </summary>
-        private void ObserverIdle()
+        private void ObserveIdle()
         {
-            if (!Owner.IsGround)
-            {
-                return;
-            }
+            if (!Owner.IsGround) { return; }
 
             Owner.ChangeLowerState(new PlayerLowerIdle(Owner));
         }

@@ -11,8 +11,10 @@ namespace Village
 {
     public class PlayerLowerIdle : IActorLowerState<Player>
     {
-        public Player Owner { get; set; }
-        public string StateName { get { return "Idle"; } }
+        public Player Owner     { get; set; }
+        public string StateName { get{ return "Idle"; } }
+
+        private Transform _tf;
         
         /// <summary>
         /// コンストラクタ
@@ -20,12 +22,15 @@ namespace Village
         public PlayerLowerIdle(Player owner)
         {
             Owner = owner;
+            _tf   = Owner.gameObject.transform;
         }
     
         public void Execute()
         {
             ObserveWalk();
             ObserveJump();
+            
+            ForwardAim();
         }
 
         /// <summary>
@@ -43,10 +48,25 @@ namespace Village
         /// </summary>
         private void ObserveJump()
         {
-            if (Owner.IsGround && Input.GetKeyDown(KeyCode.Space))
+            if (!Owner.IsJump) { return; }
+            
+            Owner.ChangeLowerState(new PlayerJump(Owner));
+        }
+        
+        /// <summary>
+        /// 進行方向を向く
+        /// </summary>
+        private void ForwardAim()
+        {
+            if (Controller.Instance.IsCharge())
             {
-                Owner.ChangeLowerState(new PlayerJump(Owner));
+                Vector3 forward = Owner.MyCamera.Forward;
+                forward.y       = _tf.forward.y;
+                
+                _tf.LookAt(_tf.position + forward);
+
+                _tf.Rotate(0,Controller.Instance.RightAxis().x,0);
             }
-        }        
+        }
     }
 }

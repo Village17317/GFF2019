@@ -39,27 +39,29 @@ namespace Village
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-            UpdateManager mTarget = target as UpdateManager;
+
             serializedObject.Update();
             _mList.DoLayoutList(); //見れるようになる
             serializedObject.ApplyModifiedProperties();
 
             if(GUILayout.Button("SetButton"))
             {
-                if (mTarget != null)
+                if (Target != null)
                 {
-                    mTarget.SetObject();
+                    Target.SetObject();
                 }
             }
 
             if (GUILayout.Button("ReSetButton"))
             {
-                if (mTarget != null)
+                if (Target != null)
                 {
-                    mTarget.DeleteAll();
+                    Target.DeleteAll();
                 }
             }
         }
 
+        private UpdateManager Target { get { return target as UpdateManager; } }
+        
     }
 }

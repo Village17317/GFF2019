@@ -3,8 +3,6 @@
  *初回作成日 ：
  *更新日     ：
 */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Village
@@ -28,6 +26,12 @@ namespace Village
         /// <param name="xKey">Horizontal</param>
         /// <param name="yKey">Vertical</param>
         Vector2 Axis(string xKey, string yKey);
+
+        /// <summary>
+        /// チャージ判定
+        /// </summary>
+        /// <returns></returns>
+        bool IsCharge();
         
         /// <summary>
         /// 弾射出判定
@@ -39,6 +43,12 @@ namespace Village
         /// </summary>
         /// <returns></returns>
         bool IsJump();
+
+        /// <summary>
+        /// 敵を狙うモードにする
+        /// </summary>
+        /// <returns></returns>
+        bool IsTargetAiming();
 
     }
 }

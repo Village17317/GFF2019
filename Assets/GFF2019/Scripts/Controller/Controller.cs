@@ -17,21 +17,24 @@ namespace Village
         private const string RightVertical   = "Vertical2";
         private const string ShotKey         = "Shot";
         private const string JumpKey         = "Jump";
+        private const string TargetAimingKey = "TargetAiming";
         
         private bool _isShotDown = false;
 
         private static Controller _instance;
 
-        public static Controller Instance
+        /// <summary>
+        /// シングルトンインスタンス
+        /// </summary>
+        public  static Controller Instance
         {
             get { return _instance ?? (_instance = new Controller()); }
         }
-        
-        
+               
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        Controller() { }
+        private Controller() { }
 
         public Vector2 LeftAxis()
         {
@@ -52,17 +55,22 @@ namespace Village
                    };
         }
 
-        public bool IsShot()
+        public bool IsCharge()
         {
-            if (Input.GetAxis(ShotKey) >= 1f && !_isShotDown)
+            if (Input.GetAxis(ShotKey) >= 1f)
             {
                 _isShotDown = true;
-                return true;
             }
-            else if (Input.GetAxis(ShotKey) <= 0f && _isShotDown)
+            
+            return _isShotDown;
+        }
+
+        public bool IsShot()
+        {
+            if (Input.GetAxis(ShotKey) <= 0f && _isShotDown)
             {
                 _isShotDown = false;
-                return false;
+                return true;
             }
 
             return false;
@@ -73,5 +81,9 @@ namespace Village
             return Input.GetButtonDown(JumpKey);
         }
 
+        public bool IsTargetAiming()
+        {
+            return Input.GetAxis(TargetAimingKey) >= 1f;
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace Village
             ObserveIdle();
             ObserveJump();
             
+            ForwardAim();
             Move();
         }
 
@@ -50,30 +51,40 @@ namespace Village
         /// </summary>
         private void ObserveJump()
         {
-            if (Owner.IsJump)
-            {
-                Owner.ChangeLowerState(new PlayerJump(Owner));
-            }
+            if (!Owner.IsJump) { return; }
+
+            Owner.ChangeLowerState(new PlayerJump(Owner));
         }
         
         /// <summary>
         /// 移動
         /// </summary>
         protected void Move()
-        {           
-            ForwardAim();
-                        
+        {                 
             _tf.position += MoveDirection() * _speed;            
         }
 
         /// <summary>
         /// 進行方向を向く
         /// </summary>
-        private void ForwardAim()
-        {
-            if(Controller.Instance.LeftAxis().Equals(Vector2.zero)) { return; }
+        protected void ForwardAim()
+        {   
+            // チャージ中はカメラの方向を向く
+            // Y軸のみ固定
+            if (Controller.Instance.IsCharge())
+            {
+                Vector3 forward = Owner.MyCamera.Forward;
+                forward.y       = _tf.forward.y;
+                
+                _tf.LookAt(_tf.position + forward);
+                _tf.Rotate(0,Controller.Instance.RightAxis().x,0);
+                return;
+            }
             
-            _tf.LookAt(_tf.position + MoveDirection());
+            if(Controller.Instance.LeftAxis().Equals(Vector2.zero)) { return; }
+            if(Controller.Instance.IsTargetAiming())                { return; }
+
+            _tf.LookAt(_tf.position + MoveDirection());        
         }
 
         /// <summary>
@@ -88,7 +99,8 @@ namespace Village
             float z = Controller.Instance.LeftAxis().y;
             
             //カメラから見た方向に直す
-            Vector3 dir = (Owner.CameraRight * x + Owner.CameraForwerd * z);
+            var cam     = Owner.MyCamera;
+            Vector3 dir = (cam.Right * x + cam.Forward * z);
 
             //Y軸方向にも移動してしまうので0で補正
             dir.y = 0f;

@@ -3,12 +3,14 @@
  *初回作成日 ：2018/10/29
  *更新日     ：2018/10/29
 */
+using UnityEngine;
+
 namespace Village
 {
     public class PlayerUpperIdle : IActorUpperState<Player>
     {
-        public Player Owner { get; set; }
-        public string StateName { get{return "Idle"; } }
+        public Player Owner     { get; set; }
+        public string StateName { get{ return "Idle"; } }
         
         /// <summary>
         /// コンストラクタ
@@ -28,11 +30,9 @@ namespace Village
         /// </summary>
         private void ObserveShot()
         {
-            if (Owner.IsAttack)
-            {
-                Owner.ChangeUpperState(new PlayerShot(Owner));
-            }       
-        }
-        
+            if (!Owner.IsCharge) { return; }
+
+            Owner.ChangeUpperState(new PlayerShot(Owner));                   
+        }        
     }
 }

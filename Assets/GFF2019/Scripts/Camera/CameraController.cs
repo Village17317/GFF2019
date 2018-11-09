@@ -8,31 +8,26 @@ using UnityEngine;
 
 namespace Village
 {
-    [RequireComponent(typeof(AudioListener))]
-    [RequireComponent(typeof(Camera))]
-    [RequireComponent(typeof(FlareLayer))]
     public class CameraController : Inheritor
     {  
         [SerializeField] private Transform    _target;     //注視するターゲット
+        [SerializeField] private Transform    _aimTarget;
         [SerializeField] private Vector3      _correction; //補正 
-        [SerializeField] private Range        _aimLimit;   //
+        [SerializeField] private Range        _aimLimit;   //aimの上限下限
         
-        private float _backLength = -10f;
-        
-        private int _rotateSignX = 1;
-        private int _rotateSignY = 1;
+        private float _backLength = -10f;     
+        private int   _rotateSignX = 1;
+        private int   _rotateSignY = 1;
+        private bool _isAim        = false;
         
         private ICameraMove _chaseMode;
               
         /// <summary>
         /// カメラから見た正面
         /// </summary>
-        public Vector3 Forwerd
+        public Vector3 Forward
         {
-            get
-            {
-                return transform.TransformDirection(Vector3.forward);             
-            }
+            get { return transform.TransformDirection(Vector3.forward); }
         }
 
         /// <summary>
@@ -42,7 +37,7 @@ namespace Village
         {
             get { return transform.TransformDirection(Vector3.right); }   
         }
-        
+                
         /// <summary>
         /// 初期化処理
         /// </summary>
@@ -79,38 +74,80 @@ namespace Village
         {
             _chaseMode = nextMode;
         }
+
+        /// <summary>
+        /// カメラからの中心点から伸ばしたRay
+        /// </summary>
+        /// <returns></returns>
+        public Ray ScreenCenterPointToRay()
+        {
+            var cam = GetComponent<Camera>();
+            var ray = cam.ScreenPointToRay(new Vector3(cam.pixelWidth, cam.pixelHeight, 0) * 0.5f);
+            
+            return ray;
+        }
         
         /// <summary>
         /// ターゲットを追尾する
         /// </summary>
         private void ChaseMove()
-        {            
-            _chaseMode.Move(_target.position + _correction, Forwerd * _backLength);
+        {
+            Vector3 pos        = _target.position + _correction;
+            Vector3 backLength = Forward * _backLength;
+
+            if (Controller.Instance.IsTargetAiming())
+            {
+                pos = _aimTarget.position;
+                backLength = Vector3.zero;
+            }
+            
+            _chaseMode.Move(pos, backLength);
         }
- 
+
+
+        
         /// <summary>
         /// ターゲットを中心に回転
         /// </summary>
         private void AimRotate()
         {
-            float x = _rotateSignX * Controller.Instance.RightAxis().y;
-            float y = _rotateSignY * Controller.Instance.RightAxis().x;
+            float aimX = _rotateSignX * Controller.Instance.RightAxis().y;
+            float aimY = _rotateSignY * Controller.Instance.RightAxis().x;
             
-            transform.localEulerAngles += new Vector3(x, y);
-                                         
-            transform.localEulerAngles = RotationLimitX(transform.localEulerAngles,_aimLimit.Min,_aimLimit.Max);            
+            if (Controller.Instance.IsTargetAiming())
+            {
+                BeginAim();
+                
+                aimX = aimX * -1;
+                aimY = 0f;
+                
+                transform.localEulerAngles = new Vector3()
+                                             {
+                                                 x = transform.localEulerAngles.x,
+                                                 y = _target.localEulerAngles.y,
+                                                 z = transform.localEulerAngles.z,
+                                             };
+            }
+            else
+            {
+                EndAim();
+            }
+
+            transform.localEulerAngles += new Vector3(aimX, aimY);                                    
+            transform.localEulerAngles = RotationLimit(transform.localEulerAngles,_aimLimit.Min,_aimLimit.Max);            
         }
 
         /// <summary>
-        /// X軸の補正
+        /// 軸の補正
         /// </summary>
         /// <param name="rotation">回転情報</param>
-        /// <param name="min">最小値</param>
-        /// <param name="max">最大値</param>
-        private static Vector3 RotationLimitX(Vector3 rotation,float min,float max)
+        /// <param name="min">     最小値  </param>
+        /// <param name="max">     最大値  </param>
+        private static Vector3 RotationLimit(Vector3 rotation,float min,float max)
         {
+            //X軸の補正
             rotation.x = RotationValueLimit(rotation.x, min, max);
-            
+            //Y軸、Z軸はそのまま
             return rotation;
         }
 
@@ -118,14 +155,36 @@ namespace Village
         /// 回転座標の補正
         /// </summary>
         /// <param name="value">補正したい軸の値</param>
-        /// <param name="min">最小値</param>
-        /// <param name="max">最大値</param>
+        /// <param name="min">  最小値         </param>
+        /// <param name="max">  最大値         </param>
         private static float RotationValueLimit(float value, float min, float max)
         {
             float angle = 180f <= value ? value - 360f : value;
             return Mathf.Clamp(angle, min, max);
         }
         
-        
+        /// <summary>
+        /// Aim状態になったとき
+        /// </summary>
+        private void BeginAim()
+        {
+            if(_isAim) { return; }
+            
+            _isAim                     = true;
+            transform.localEulerAngles = _target.localEulerAngles;
+        }
+
+        /// <summary>
+        /// Aim状態から通常状態に戻ったとき
+        /// </summary>
+        private void EndAim()
+        {
+            if(!_isAim) { return; }
+
+            _isAim = false;
+            transform.localEulerAngles = _target.localEulerAngles;
+        }
+
+
     }
 }
