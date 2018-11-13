@@ -14,7 +14,7 @@ namespace Village
         [SerializeField] private float _speed   = 1.0f;
         [SerializeField] private float _power   = 1.0f;
         [SerializeField] private float _defense = 0.0f;
-
+        
         /// <summary>
         /// 体力
         /// </summary>

@@ -12,10 +12,12 @@ namespace Village
     public class Player : Actor<Player>
     {
         [SerializeField] private BulletParams     _bulletParams;
-        [SerializeField] private CameraController _cameraController;        
-                
+        [SerializeField] private CameraController _cameraController;
+        [SerializeField] private LaserPointer     _laser;
+        
         public BulletParams     BulletData { get { return _bulletParams;     } }
         public CameraController MyCamera   { get { return _cameraController; } }
+        public LaserPointer     Laser      { get { return _laser;            } }
         
         /// <summary>
         /// 移動中か
@@ -32,14 +34,14 @@ namespace Village
         {
             get
             {
-                float   length = 1.1f;
-                Vector3 center = transform.position + Vector3.up;
+                const float Length = 1.1f;
+                Vector3     center = transform.position + Vector3.up;
                 
                 Ray ray = new Ray(center, Vector3.down);
                 RaycastHit hit;
-                Debug.DrawRay(center,Vector3.down * length,Color.red);
+                Debug.DrawRay(center,Vector3.down * Length,Color.red);
                 
-                return Physics.Raycast(ray, out hit, length);
+                return Physics.Raycast(ray, out hit, Length);
             }
         }
 
@@ -86,6 +88,9 @@ namespace Village
             {
                 transform.Rotate(0,Controller.Instance.RightAxis().x,0);
             }
+            
+            _laser.SetLineVisible  (Controller.Instance.IsCharge());
+            _laser.SetCursorVisible(Controller.Instance.IsTargetAiming());
             
             nowUpperAction.Execute();
             nowLowerAction.Execute();

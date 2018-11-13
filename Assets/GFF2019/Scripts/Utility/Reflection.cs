@@ -19,7 +19,17 @@ namespace Village
             get { return _reflectionVec.normalized; }
         }
 
-        public static Reflection ReflectionVector(Vector3 center,Vector3 dir)
+        public Vector3 HitPoint     { get; private set; }
+        public Vector3 NextHitPoint { get; private set; }
+        public float   Length       { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="center"></param>
+        /// <param name="dir"></param>
+        /// <returns></returns>
+        public static Reflection ReflectionDataCreate(Vector3 center,Vector3 dir)
         {
             var ret = new Reflection();
             
@@ -30,10 +40,16 @@ namespace Village
             if (!Physics.Raycast(ray, out hit)) { return ret; }
 
             Vector3 incomingVec = hit.point - center;
-            ret._reflectionVec  = Vector3.Reflect(incomingVec, hit.normal);
             
-            Debug.DrawLine(center, hit.point, Color.red);
-            Debug.DrawRay (hit.point, ret._reflectionVec, Color.green);
+            ret._reflectionVec  = Vector3.Reflect(incomingVec, hit.normal);
+            ret.HitPoint        = hit.point;
+            ret.Length          = hit.distance;
+            
+            ray = new Ray(ret.HitPoint,ret.ReflectionVec);
+            
+            if(!Physics.Raycast(ray,out hit)) { return ret; }
+
+            ret.NextHitPoint = hit.point;
             
             return ret;
         }

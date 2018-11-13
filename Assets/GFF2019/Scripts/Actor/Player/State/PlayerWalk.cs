@@ -24,7 +24,7 @@ namespace Village
         {
             Owner  = owner;
             _tf    = owner.gameObject.transform;
-            _speed = owner.State.Speed;
+            _speed = owner.Params.Speed;
         }
         
         public virtual void Execute()

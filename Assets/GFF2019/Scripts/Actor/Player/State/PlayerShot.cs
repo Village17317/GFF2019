@@ -38,8 +38,8 @@ namespace Village
 
         public void Execute()
         {
-            Reflection.ReflectionVector(Owner.BulletData.FirePos, Direction);
-            
+            DrawDirectionLine();
+                      
             Fire(_bullet.GetComponent<Bullet>());
             
             ObserveIdle();
@@ -66,6 +66,33 @@ namespace Village
             return bullet;
         }
 
+        /// <summary>
+        /// 進む方向をラインで描画
+        /// </summary>
+        private void DrawDirectionLine()
+        {
+            var data = Reflection.ReflectionDataCreate(Owner.BulletData.FirePos, Direction);
+            Vector3[] vertexPoints;
+            if (Controller.Instance.IsTargetAiming())
+            {
+                vertexPoints = new Vector3[]
+                               {
+                                   data.HitPoint,    //最初に当たった場所
+                                   data.NextHitPoint //次に当たる場所
+                               };
+            }
+            else
+            {
+                vertexPoints = new Vector3[]
+                               {
+                                   Owner.BulletData.FirePos,  //発射位置
+                                   data.HitPoint,             //最初に当たった場所
+                                   data.NextHitPoint          //次に当たる場所
+                               };
+            }
+            Owner.Laser.SetLaser(vertexPoints);       
+        }
+        
         /// <summary>
         /// 射出
         /// </summary>

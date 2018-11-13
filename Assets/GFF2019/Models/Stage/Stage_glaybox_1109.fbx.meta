@@ -1,0 +1,725 @@
+fileFormatVersion: 2
+guid: 32643ef73b3e99544b8ad2656d6df238
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Entrance
+    100002: F_1
+    100004: Gate
+    100006: group1
+    100008: group11
+    100010: group12
+    100012: group15
+    100014: group16
+    100016: KingRoom
+    100018: pCube25
+    100020: pCube26
+    100022: pCube28
+    100024: pCube65
+    100026: pCube66
+    100028: pCube67
+    100030: pCylinder1
+    100032: pCylinder2
+    100034: Roof
+    100036: Roof1
+    100038: Sekizou
+    100040: //RootNode
+    100042: Stair20_40_250
+    100044: Wall
+    100046: Wall1
+    100048: Wall1 1
+    100050: Wall10
+    100052: Wall10 1
+    100054: Wall11
+    100056: Wall11 1
+    100058: Wall12
+    100060: Wall14
+    100062: Wall15
+    100064: Wall16
+    100066: Wall17
+    100068: Wall18
+    100070: Wall19
+    100072: Wall20
+    100074: Wall21
+    100076: Wall22
+    100078: Wall23
+    100080: Wall24
+    100082: Wall25
+    100084: Wall26
+    100086: Wall27
+    100088: Wall28
+    100090: Wall29
+    100092: Wall3
+    100094: Wall3 1
+    100096: Wall30
+    100098: Wall31
+    100100: Wall32
+    100102: Wall33
+    100104: Wall34
+    100106: Wall35
+    100108: Wall36
+    100110: Wall37
+    100112: Wall38
+    100114: Wall39
+    100116: Wall40
+    100118: Wall41
+    100120: Wall42
+    100122: Wall5
+    100124: Wall5 1
+    100126: Wall6
+    100128: Wall6 1
+    100130: Wall7
+    100132: Wall7 1
+    100134: Wall8
+    100136: Wall8 1
+    100138: Wall9
+    100140: Wall9 1
+    100142: Wall_ori_300_300
+    100144: Wall_ori_300_301
+    100146: Wall_ori_300_302
+    100148: Wall_ori_300_303
+    100150: Wall_ori_300_304
+    100152: Wall_ori_300_306
+    100154: Wall_ori_300_307
+    100156: Wall_ori_300_308
+    100158: Wall_ori_300_309
+    100160: Wall_ori_300_310
+    100162: Wall_ori_300_311
+    100164: Wall_ori_300_312
+    100166: Wall_ori_300_313
+    100168: Wall_ori_300_315
+    100170: Wall_ori_300_316
+    100172: Wall_ori_300_317
+    100174: Wall_ori_300_318
+    100176: Wall_ori_300_319
+    100178: Wall_ori_300_320
+    100180: Wall_ori_300_321
+    100182: Wall_ori_300_322
+    100184: Wall_ori_300_323
+    100186: Wall_ori_300_324
+    100188: Wall_ori_300_325
+    100190: Wall_ori_300_326
+    100192: Wall_ori_300_328
+    100194: Wall_ori_300_329
+    100196: Wall_ori_300_330
+    100198: Wall_ori_300_331
+    100200: Wall_ori_300_332
+    100202: Wall_ori_300_333
+    100204: Wall_ori_300_334
+    100206: Wall_ori_300_335
+    100208: Wall_ori_300_336
+    100210: Wall_ori_300_337
+    100212: Wall_ori_300_338
+    100214: Wall_ori_300_339
+    100216: Wall_ori_300_340
+    100218: Wall_ori_300_341
+    100220: Wall_ori_300_342
+    100222: Wall_ori_300_343
+    100224: Wall_ori_300_344
+    100226: Wall_ori_300_345
+    100228: Wall_ori_300_346
+    100230: Wall_ori_300_347
+    100232: Wall_ori_300_348
+    100234: Wall_ori_300_349
+    100236: Wall_ori_300_350
+    100238: Wall_ori_300_351
+    100240: Wall_ori_300_352
+    100242: Wall_ori_300_353
+    100244: Yane
+    100246: Yuka
+    100248: Yuka1
+    100250: Yuka_300_300
+    100252: Yuka_300_300 1
+    100254: Yuka_300_301
+    100256: Yuka_300_301 1
+    100258: Yuka_300_302
+    100260: Yuka_300_302 1
+    100262: Yuka_300_303
+    100264: Yuka_300_303 1
+    100266: Yuka_300_304
+    100268: Yuka_300_304 1
+    100270: Yuka_ori_300_300
+    400000: Entrance
+    400002: F_1
+    400004: Gate
+    400006: group1
+    400008: group11
+    400010: group12
+    400012: group15
+    400014: group16
+    400016: KingRoom
+    400018: pCube25
+    400020: pCube26
+    400022: pCube28
+    400024: pCube65
+    400026: pCube66
+    400028: pCube67
+    400030: pCylinder1
+    400032: pCylinder2
+    400034: Roof
+    400036: Roof1
+    400038: Sekizou
+    400040: //RootNode
+    400042: Stair20_40_250
+    400044: Wall
+    400046: Wall1
+    400048: Wall1 1
+    400050: Wall10
+    400052: Wall10 1
+    400054: Wall11
+    400056: Wall11 1
+    400058: Wall12
+    400060: Wall14
+    400062: Wall15
+    400064: Wall16
+    400066: Wall17
+    400068: Wall18
+    400070: Wall19
+    400072: Wall20
+    400074: Wall21
+    400076: Wall22
+    400078: Wall23
+    400080: Wall24
+    400082: Wall25
+    400084: Wall26
+    400086: Wall27
+    400088: Wall28
+    400090: Wall29
+    400092: Wall3
+    400094: Wall3 1
+    400096: Wall30
+    400098: Wall31
+    400100: Wall32
+    400102: Wall33
+    400104: Wall34
+    400106: Wall35
+    400108: Wall36
+    400110: Wall37
+    400112: Wall38
+    400114: Wall39
+    400116: Wall40
+    400118: Wall41
+    400120: Wall42
+    400122: Wall5
+    400124: Wall5 1
+    400126: Wall6
+    400128: Wall6 1
+    400130: Wall7
+    400132: Wall7 1
+    400134: Wall8
+    400136: Wall8 1
+    400138: Wall9
+    400140: Wall9 1
+    400142: Wall_ori_300_300
+    400144: Wall_ori_300_301
+    400146: Wall_ori_300_302
+    400148: Wall_ori_300_303
+    400150: Wall_ori_300_304
+    400152: Wall_ori_300_306
+    400154: Wall_ori_300_307
+    400156: Wall_ori_300_308
+    400158: Wall_ori_300_309
+    400160: Wall_ori_300_310
+    400162: Wall_ori_300_311
+    400164: Wall_ori_300_312
+    400166: Wall_ori_300_313
+    400168: Wall_ori_300_315
+    400170: Wall_ori_300_316
+    400172: Wall_ori_300_317
+    400174: Wall_ori_300_318
+    400176: Wall_ori_300_319
+    400178: Wall_ori_300_320
+    400180: Wall_ori_300_321
+    400182: Wall_ori_300_322
+    400184: Wall_ori_300_323
+    400186: Wall_ori_300_324
+    400188: Wall_ori_300_325
+    400190: Wall_ori_300_326
+    400192: Wall_ori_300_328
+    400194: Wall_ori_300_329
+    400196: Wall_ori_300_330
+    400198: Wall_ori_300_331
+    400200: Wall_ori_300_332
+    400202: Wall_ori_300_333
+    400204: Wall_ori_300_334
+    400206: Wall_ori_300_335
+    400208: Wall_ori_300_336
+    400210: Wall_ori_300_337
+    400212: Wall_ori_300_338
+    400214: Wall_ori_300_339
+    400216: Wall_ori_300_340
+    400218: Wall_ori_300_341
+    400220: Wall_ori_300_342
+    400222: Wall_ori_300_343
+    400224: Wall_ori_300_344
+    400226: Wall_ori_300_345
+    400228: Wall_ori_300_346
+    400230: Wall_ori_300_347
+    400232: Wall_ori_300_348
+    400234: Wall_ori_300_349
+    400236: Wall_ori_300_350
+    400238: Wall_ori_300_351
+    400240: Wall_ori_300_352
+    400242: Wall_ori_300_353
+    400244: Yane
+    400246: Yuka
+    400248: Yuka1
+    400250: Yuka_300_300
+    400252: Yuka_300_300 1
+    400254: Yuka_300_301
+    400256: Yuka_300_301 1
+    400258: Yuka_300_302
+    400260: Yuka_300_302 1
+    400262: Yuka_300_303
+    400264: Yuka_300_303 1
+    400266: Yuka_300_304
+    400268: Yuka_300_304 1
+    400270: Yuka_ori_300_300
+    2100000: lambert1
+    2300000: Gate
+    2300002: pCube25
+    2300004: pCube26
+    2300006: pCube28
+    2300008: pCube65
+    2300010: pCube66
+    2300012: pCube67
+    2300014: pCylinder1
+    2300016: pCylinder2
+    2300018: Stair20_40_250
+    2300020: Wall1
+    2300022: Wall1 1
+    2300024: Wall10
+    2300026: Wall10 1
+    2300028: Wall11
+    2300030: Wall11 1
+    2300032: Wall12
+    2300034: Wall14
+    2300036: Wall15
+    2300038: Wall16
+    2300040: Wall17
+    2300042: Wall18
+    2300044: Wall19
+    2300046: Wall20
+    2300048: Wall21
+    2300050: Wall22
+    2300052: Wall23
+    2300054: Wall24
+    2300056: Wall25
+    2300058: Wall26
+    2300060: Wall27
+    2300062: Wall28
+    2300064: Wall29
+    2300066: Wall3
+    2300068: Wall3 1
+    2300070: Wall30
+    2300072: Wall31
+    2300074: Wall32
+    2300076: Wall33
+    2300078: Wall34
+    2300080: Wall35
+    2300082: Wall36
+    2300084: Wall37
+    2300086: Wall38
+    2300088: Wall39
+    2300090: Wall40
+    2300092: Wall41
+    2300094: Wall5
+    2300096: Wall5 1
+    2300098: Wall6
+    2300100: Wall6 1
+    2300102: Wall7
+    2300104: Wall7 1
+    2300106: Wall8
+    2300108: Wall8 1
+    2300110: Wall9
+    2300112: Wall9 1
+    2300114: Wall_ori_300_300
+    2300116: Wall_ori_300_301
+    2300118: Wall_ori_300_302
+    2300120: Wall_ori_300_303
+    2300122: Wall_ori_300_304
+    2300124: Wall_ori_300_306
+    2300126: Wall_ori_300_307
+    2300128: Wall_ori_300_308
+    2300130: Wall_ori_300_309
+    2300132: Wall_ori_300_310
+    2300134: Wall_ori_300_311
+    2300136: Wall_ori_300_312
+    2300138: Wall_ori_300_313
+    2300140: Wall_ori_300_315
+    2300142: Wall_ori_300_316
+    2300144: Wall_ori_300_317
+    2300146: Wall_ori_300_318
+    2300148: Wall_ori_300_319
+    2300150: Wall_ori_300_320
+    2300152: Wall_ori_300_321
+    2300154: Wall_ori_300_322
+    2300156: Wall_ori_300_323
+    2300158: Wall_ori_300_324
+    2300160: Wall_ori_300_325
+    2300162: Wall_ori_300_326
+    2300164: Wall_ori_300_328
+    2300166: Wall_ori_300_329
+    2300168: Wall_ori_300_330
+    2300170: Wall_ori_300_331
+    2300172: Wall_ori_300_332
+    2300174: Wall_ori_300_333
+    2300176: Wall_ori_300_334
+    2300178: Wall_ori_300_335
+    2300180: Wall_ori_300_336
+    2300182: Wall_ori_300_337
+    2300184: Wall_ori_300_338
+    2300186: Wall_ori_300_339
+    2300188: Wall_ori_300_340
+    2300190: Wall_ori_300_341
+    2300192: Wall_ori_300_342
+    2300194: Wall_ori_300_343
+    2300196: Wall_ori_300_344
+    2300198: Wall_ori_300_345
+    2300200: Wall_ori_300_346
+    2300202: Wall_ori_300_347
+    2300204: Wall_ori_300_348
+    2300206: Wall_ori_300_349
+    2300208: Wall_ori_300_350
+    2300210: Wall_ori_300_351
+    2300212: Wall_ori_300_352
+    2300214: Wall_ori_300_353
+    2300216: Yane
+    2300218: Yuka
+    2300220: Yuka1
+    2300222: Yuka_300_300
+    2300224: Yuka_300_300 1
+    2300226: Yuka_300_301
+    2300228: Yuka_300_301 1
+    2300230: Yuka_300_302
+    2300232: Yuka_300_302 1
+    2300234: Yuka_300_303
+    2300236: Yuka_300_303 1
+    2300238: Yuka_300_304
+    2300240: Yuka_300_304 1
+    2300242: Yuka_ori_300_300
+    3300000: Gate
+    3300002: pCube25
+    3300004: pCube26
+    3300006: pCube28
+    3300008: pCube65
+    3300010: pCube66
+    3300012: pCube67
+    3300014: pCylinder1
+    3300016: pCylinder2
+    3300018: Stair20_40_250
+    3300020: Wall1
+    3300022: Wall1 1
+    3300024: Wall10
+    3300026: Wall10 1
+    3300028: Wall11
+    3300030: Wall11 1
+    3300032: Wall12
+    3300034: Wall14
+    3300036: Wall15
+    3300038: Wall16
+    3300040: Wall17
+    3300042: Wall18
+    3300044: Wall19
+    3300046: Wall20
+    3300048: Wall21
+    3300050: Wall22
+    3300052: Wall23
+    3300054: Wall24
+    3300056: Wall25
+    3300058: Wall26
+    3300060: Wall27
+    3300062: Wall28
+    3300064: Wall29
+    3300066: Wall3
+    3300068: Wall3 1
+    3300070: Wall30
+    3300072: Wall31
+    3300074: Wall32
+    3300076: Wall33
+    3300078: Wall34
+    3300080: Wall35
+    3300082: Wall36
+    3300084: Wall37
+    3300086: Wall38
+    3300088: Wall39
+    3300090: Wall40
+    3300092: Wall41
+    3300094: Wall5
+    3300096: Wall5 1
+    3300098: Wall6
+    3300100: Wall6 1
+    3300102: Wall7
+    3300104: Wall7 1
+    3300106: Wall8
+    3300108: Wall8 1
+    3300110: Wall9
+    3300112: Wall9 1
+    3300114: Wall_ori_300_300
+    3300116: Wall_ori_300_301
+    3300118: Wall_ori_300_302
+    3300120: Wall_ori_300_303
+    3300122: Wall_ori_300_304
+    3300124: Wall_ori_300_306
+    3300126: Wall_ori_300_307
+    3300128: Wall_ori_300_308
+    3300130: Wall_ori_300_309
+    3300132: Wall_ori_300_310
+    3300134: Wall_ori_300_311
+    3300136: Wall_ori_300_312
+    3300138: Wall_ori_300_313
+    3300140: Wall_ori_300_315
+    3300142: Wall_ori_300_316
+    3300144: Wall_ori_300_317
+    3300146: Wall_ori_300_318
+    3300148: Wall_ori_300_319
+    3300150: Wall_ori_300_320
+    3300152: Wall_ori_300_321
+    3300154: Wall_ori_300_322
+    3300156: Wall_ori_300_323
+    3300158: Wall_ori_300_324
+    3300160: Wall_ori_300_325
+    3300162: Wall_ori_300_326
+    3300164: Wall_ori_300_328
+    3300166: Wall_ori_300_329
+    3300168: Wall_ori_300_330
+    3300170: Wall_ori_300_331
+    3300172: Wall_ori_300_332
+    3300174: Wall_ori_300_333
+    3300176: Wall_ori_300_334
+    3300178: Wall_ori_300_335
+    3300180: Wall_ori_300_336
+    3300182: Wall_ori_300_337
+    3300184: Wall_ori_300_338
+    3300186: Wall_ori_300_339
+    3300188: Wall_ori_300_340
+    3300190: Wall_ori_300_341
+    3300192: Wall_ori_300_342
+    3300194: Wall_ori_300_343
+    3300196: Wall_ori_300_344
+    3300198: Wall_ori_300_345
+    3300200: Wall_ori_300_346
+    3300202: Wall_ori_300_347
+    3300204: Wall_ori_300_348
+    3300206: Wall_ori_300_349
+    3300208: Wall_ori_300_350
+    3300210: Wall_ori_300_351
+    3300212: Wall_ori_300_352
+    3300214: Wall_ori_300_353
+    3300216: Yane
+    3300218: Yuka
+    3300220: Yuka1
+    3300222: Yuka_300_300
+    3300224: Yuka_300_300 1
+    3300226: Yuka_300_301
+    3300228: Yuka_300_301 1
+    3300230: Yuka_300_302
+    3300232: Yuka_300_302 1
+    3300234: Yuka_300_303
+    3300236: Yuka_300_303 1
+    3300238: Yuka_300_304
+    3300240: Yuka_300_304 1
+    3300242: Yuka_ori_300_300
+    4300000: Yuka_ori_300_300
+    4300002: Wall_ori_300_300
+    4300004: Gate
+    4300006: Yane
+    4300008: Yuka
+    4300010: Stair20_40_250
+    4300012: pCylinder1
+    4300014: pCylinder2
+    4300016: Yuka_300_300
+    4300018: Yuka_300_301
+    4300020: Yuka_300_302
+    4300022: Yuka_300_303
+    4300024: Yuka_300_304
+    4300026: Yuka_300_300
+    4300028: Yuka_300_301
+    4300030: Yuka_300_302
+    4300032: Yuka_300_303
+    4300034: Yuka_300_304
+    4300036: Wall14
+    4300038: Wall16
+    4300040: Wall_ori_300_302
+    4300042: Wall18
+    4300044: Wall_ori_300_303
+    4300046: Wall8
+    4300048: Wall7
+    4300050: Wall10
+    4300052: Wall9
+    4300054: Wall11
+    4300056: Wall1
+    4300058: Wall6
+    4300060: Wall5
+    4300062: Wall3
+    4300064: Wall19
+    4300066: Wall20
+    4300068: Wall21
+    4300070: Wall22
+    4300072: Wall23
+    4300074: Wall24
+    4300076: Wall25
+    4300078: Wall26
+    4300080: Wall27
+    4300082: Wall12
+    4300084: Wall15
+    4300086: Wall_ori_300_304
+    4300088: Wall17
+    4300090: Wall_ori_300_301
+    4300092: Wall9
+    4300094: Wall8
+    4300096: Wall7
+    4300098: Wall10
+    4300100: Wall3
+    4300102: Wall11
+    4300104: Wall1
+    4300106: Wall6
+    4300108: Wall5
+    4300110: Wall28
+    4300112: Wall29
+    4300114: Wall30
+    4300116: Wall31
+    4300118: Wall32
+    4300120: Wall33
+    4300122: Wall34
+    4300124: Wall35
+    4300126: Wall36
+    4300128: Wall37
+    4300130: Wall38
+    4300132: Yuka1
+    4300134: Wall40
+    4300136: Wall_ori_300_338
+    4300138: Wall_ori_300_339
+    4300140: Wall_ori_300_340
+    4300142: Wall_ori_300_337
+    4300144: pCube65
+    4300146: Wall_ori_300_341
+    4300148: Wall_ori_300_347
+    4300150: pCube66
+    4300152: Wall_ori_300_345
+    4300154: Wall_ori_300_342
+    4300156: Wall41
+    4300158: Wall_ori_300_346
+    4300160: Wall_ori_300_343
+    4300162: Wall_ori_300_344
+    4300164: pCube28
+    4300166: pCube26
+    4300168: pCube25
+    4300170: Wall_ori_300_307
+    4300172: Wall_ori_300_308
+    4300174: Wall_ori_300_306
+    4300176: Wall_ori_300_309
+    4300178: Wall_ori_300_310
+    4300180: Wall_ori_300_311
+    4300182: Wall_ori_300_312
+    4300184: Wall_ori_300_313
+    4300186: Wall_ori_300_315
+    4300188: Wall_ori_300_316
+    4300190: Wall_ori_300_317
+    4300192: Wall_ori_300_318
+    4300194: Wall_ori_300_319
+    4300196: Wall_ori_300_320
+    4300198: Wall_ori_300_321
+    4300200: Wall_ori_300_322
+    4300202: Wall_ori_300_323
+    4300204: Wall_ori_300_324
+    4300206: Wall_ori_300_325
+    4300208: Wall_ori_300_326
+    4300210: Wall_ori_300_328
+    4300212: Wall_ori_300_329
+    4300214: Wall_ori_300_330
+    4300216: Wall_ori_300_331
+    4300218: Wall_ori_300_332
+    4300220: Wall_ori_300_333
+    4300222: Wall_ori_300_336
+    4300224: Wall_ori_300_348
+    4300226: Wall_ori_300_334
+    4300228: Wall39
+    4300230: Wall_ori_300_335
+    4300232: Wall_ori_300_350
+    4300234: Wall_ori_300_349
+    4300236: Wall_ori_300_353
+    4300238: Wall_ori_300_352
+    4300240: Wall_ori_300_351
+    4300242: pCube67
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

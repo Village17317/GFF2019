@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2e19956d9b5d27418c4599a6fc638ce, type: 3}
-  m_Name: PlayerParams
+  m_Name: EnemyParams
   m_EditorClassIdentifier: 
-  _hp: 1
+  _hp: 3
   _speed: 0.1
   _power: 1
   _defense: 0

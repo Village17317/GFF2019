@@ -5,6 +5,7 @@
 */
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace Village
         private Vector3 _direction;     //進む方向
         private float   _speed;         //進む速度
         private int     _level;         //弾のレベル
-       
+        
         ///<summary>
         /// 初期起動時
         ///</summary>
@@ -68,7 +69,7 @@ namespace Village
             GetComponent<MeshRenderer>().enabled = isVisible;
             GetComponent<Collider>().enabled     = isVisible;
         }
-        
+                
         /// <summary>
         /// 死亡判定
         /// </summary>
@@ -84,18 +85,16 @@ namespace Village
         private void OnCollisionEnter(Collision other)
         {            
             _boundCounter.CountUp(1);
-            ReflectionCalc(other);
         }
 
         /// <summary>
         /// 反射の計算
         /// </summary>
-        /// <param name="other"></param>
-        private void ReflectionCalc(Collision other)
+        private void ReflectionCalc()
         {
             // 反射ベクトルを計算する            
-            var refData = Reflection.ReflectionVector(transform.position, _direction); 
-            _direction = refData.ReflectionVec;
+            var refData = Reflection.ReflectionDataCreate(transform.position, _direction); 
+            _direction  = refData.ReflectionVec;
         }
 
         /// <summary>
@@ -110,6 +109,8 @@ namespace Village
                 Ray        ray = new Ray(transform.position,_direction);
                 RaycastHit hit;
 
+                Debug.DrawRay(ray.origin + ray.direction,ray.direction,Color.red);
+                
                 if (!Physics.Raycast(ray, out hit, _speed))
                 {
                     //なにもなければ方向×速度
@@ -117,11 +118,28 @@ namespace Village
                 }
             
                 //なにか当たったら方向×（当たった位置から現在地までの長さ）
-                Vector3 hitPos = hit.point - transform.localScale;
+                Vector3 hitPos = hit.point - transform.localScale * 0.5f;
                 float   length = (hitPos - transform.position).magnitude;
+                
+                ReflectionCalc();
+                
                 return _direction * length;
             }
         }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// 進む方向、速度、チャージレベルを文字列にして渡す
+        /// <para>主にEditor中で使用</para>
+        /// </summary>
+        public string DataToString()
+        {
+            return StringBuildManager.Build("Direction : ", _direction.ToString() , " : ",
+                                            "Speed : "    , _speed.ToString(CultureInfo.InvariantCulture) , " : ",
+                                            "Level : "    , _level.ToString(), " : " ,
+                                            "Reflection"  , _boundCounter.Value.ToString());
+        }
+        #endif
         
     }
 }

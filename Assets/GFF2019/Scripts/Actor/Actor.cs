@@ -9,8 +9,8 @@ namespace Village
 {
     public abstract class Actor<T> : Inheritor where T : Actor<T>
     {
-        [SerializeField] protected ActorParams myState;
-        public                     ActorParams State { get { return myState; } }
+        [SerializeField] protected ActorParams maxParams;
+        public                     ActorParams Params { get { return maxParams; } }
         
         protected                  IActorUpperState<T> nowUpperAction;
         protected                  IActorLowerState<T> nowLowerAction;
